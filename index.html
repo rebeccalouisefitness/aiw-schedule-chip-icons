@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Today's Schedule — chip icon options (AIW-301)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#0D2842;--border:#E8E1D4;--bg:#FAF9F5;--muted:#8A8F96;--sub:#6B7280;--blue:#5A8FB0}
+  *{box-sizing:border-box}
+  body{margin:0;background:#EFECE4;font-family:Inter,system-ui,sans-serif;color:var(--navy)}
+  header{max-width:1100px;margin:0 auto;padding:28px 20px 0}
+  h1{font-family:"Plus Jakarta Sans";font-size:22px;margin:0 0 6px}
+  header p{margin:0;color:var(--sub);font-size:14px;line-height:1.5;max-width:720px}
+  .wrap{max-width:1100px;margin:0 auto;padding:24px 20px 30px;display:flex;gap:36px;flex-wrap:wrap;justify-content:center;align-items:flex-start}
+  .phone{width:390px;background:var(--bg);border-radius:34px;border:1px solid #d9d3c6;box-shadow:0 20px 50px rgba(13,40,66,.12);padding:16px;flex:none;position:sticky;top:20px}
+  .phoneLbl{font-size:11px;font-weight:700;letter-spacing:1.2px;color:var(--muted);text-transform:uppercase;text-align:center;margin:4px 0 12px}
+  .card{background:#fff;border:1px solid var(--border);border-radius:18px;overflow:hidden;box-shadow:0 5px 12px rgba(90,100,112,.06)}
+  .head{display:flex;gap:10px;align-items:flex-start;padding:15px 16px 14px;cursor:pointer;user-select:none}
+  .kicker{font-weight:800;font-size:12px;line-height:22px;letter-spacing:1.2px;text-transform:uppercase}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .chip{display:flex;align-items:center;gap:4px;border-radius:999px;padding:3px 8px;font-weight:800;font-size:11.5px}
+  .side{display:flex;flex-direction:column;align-items:center;gap:10px}
+  .bell{position:relative;width:24px;height:24px}
+  .badge{position:absolute;top:-8px;right:-12px;height:22px;width:28px;border-radius:11px;border:2px solid #fff;background:var(--blue);color:#fff;font-weight:800;font-size:10.5px;display:flex;align-items:center;justify-content:center;font-variant-numeric:tabular-nums}
+  .row{display:flex;align-items:center;gap:12px;padding:12px 16px;border-top:1px solid #F1ECE2}
+  .tile{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex:none}
+  .rt{font-family:"Plus Jakarta Sans";font-weight:700;font-size:14.5px}
+  .rs{font-size:11.8px;color:var(--sub);margin-top:3px}
+  .pill{margin-left:auto;font-weight:800;font-size:12px;border-radius:999px;padding:3px 9px;background:#F3EFE7}
+  .hint{font-size:11.5px;color:var(--muted);text-align:center;margin-top:10px}
+  .pickers{flex:1;min-width:320px;max-width:600px;display:flex;flex-direction:column;gap:18px}
+  .pk{background:#fff;border:1px solid var(--border);border-radius:16px;padding:16px}
+  .pkH{display:flex;align-items:center;gap:10px}
+  .pkH .tile{width:30px;height:30px;border-radius:9px}
+  .pkT{font-family:"Plus Jakarta Sans";font-weight:800;font-size:15px}
+  .pkD{font-size:13px;color:var(--sub);line-height:1.45;margin:8px 0 12px}
+  .opts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .opt{border:1.5px solid var(--border);border-radius:12px;padding:10px 6px 8px;background:#fff;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;font:inherit;color:inherit}
+  .opt:hover{border-color:#cfc6b4}
+  .opt.on{border-color:var(--navy);box-shadow:0 0 0 1px var(--navy)}
+  .opt .tile{width:40px;height:40px}
+  .ol{font-size:11.5px;font-weight:700;text-align:center;line-height:1.25}
+  .os{font-size:10.5px;color:var(--muted);text-align:center;line-height:1.25}
+  .noteWrap{max-width:1100px;margin:0 auto 40px;padding:0 20px}
+  .note{font-size:12.5px;color:var(--sub);line-height:1.5;background:#fff;border:1px dashed #d6cdbb;border-radius:12px;padding:12px 14px}
+  .note b{color:var(--navy)}
+  .sel{margin-top:14px;font-size:13px;font-weight:700;text-align:center}
+</style>
+</head>
+<body>
+<header>
+  <h1>Today's Schedule — new chip icons</h1>
+  <p>Design only — nothing has changed in the app. Tap an option under each chip and the card updates. Same line-icon family as the rest of the app (24-grid, 2px round stroke); chip colours unchanged. "Current" is what's live now. Tap the card to open it.</p>
+</header>
+<div class="wrap">
+  <div class="phone">
+    <div class="phoneLbl">390px · Home</div>
+    <div class="card">
+      <div class="head" id="head">
+        <div style="flex:1;min-width:0">
+          <div class="kicker">Today's Schedule</div>
+          <div class="chips" id="chips"></div>
+        </div>
+        <div class="side">
+          <div class="bell">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#0D2842" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+            <div class="badge">69</div>
+          </div>
+          <svg id="chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#C8956C" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></svg>
+        </div>
+      </div>
+      <div id="rows" style="display:none"></div>
+    </div>
+    <div class="hint">Tap the card to open / close</div>
+    <div class="sel" id="sel"></div>
+  </div>
+  <div class="pickers" id="pickers"></div>
+</div>
+<div class="noteWrap"><div class="note"><b>Heads-up:</b> inside the open card, each row uses the same icon as its chip, so whichever you pick would change on the row too. If you'd rather the rows keep their current icons, say so and only the chips will change.</div></div>
+<script>
+const ICONS = {
+  fu: { name:'Customer Follow-Ups', count:9, fill:'#F4EADC', stroke:'#A67C46', txt:'#A9764E', sub:'9 customers to follow up with',
+    what:'Customers in their first 30 days (you started their journey) who have a check-in due from you today.',
+    opts:[
+      {k:'cur',l:'Current',s:'checklist',svg:'<path d="M9 5h11M9 12h11M9 19h11"/><path d="M3 5.5l1.4 1.4L7 4.5"/><path d="M3 12.5l1.4 1.4L7 11.5"/><circle cx="4.5" cy="19" r="1.4"/>'},
+      {k:'A',l:'A · Customer + clock',s:'a check-in is due',svg:'<circle cx="9" cy="7" r="4"/><path d="M2 21v-1a6 6 0 0 1 6-6h2"/><circle cx="17.5" cy="17" r="4.5"/><path d="M17.5 14.8V17l1.5 1"/>'},
+      {k:'B',l:'B · Customer + heart',s:'looking after them',svg:'<circle cx="9" cy="7" r="4"/><path d="M2 21v-1a6 6 0 0 1 6-6h3"/><path d="M17.5 21s-3.8-2.2-3.8-4.7a2 2 0 0 1 3.8-.9 2 2 0 0 1 3.8.9c0 2.5-3.8 4.7-3.8 4.7z"/>'},
+      {k:'C',l:'C · Customer + loop',s:'come back to them',svg:'<circle cx="9" cy="7" r="4"/><path d="M2 21v-1a6 6 0 0 1 6-6h3"/><path d="M21 17a4 4 0 1 1-1.2-2.85"/><path d="M21 12.5v2.6h-2.6"/>'}
+    ]},
+  msg: { name:'Messages', count:2, fill:'#E7EFE6', stroke:'#5A7A5E', txt:'#5A7A5E', sub:'2 messages need a reply',
+    what:'Customers who have messaged you since you last opened their chat, waiting on your reply.',
+    opts:[
+      {k:'cur',l:'Current',s:'plain bubble',svg:'<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>'},
+      {k:'A',l:'A · Bubble + unread dot',s:'a new message waiting',svg:'<path d="M21 12v3a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h9"/><circle cx="19.5" cy="4.5" r="2.5" fill="currentColor"/>'},
+      {k:'B',l:'B · Bubble + reply arrow',s:'needs your reply',svg:'<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M10 7.5L7.5 10l2.5 2.5"/><path d="M7.5 10H14a2.5 2.5 0 0 1 2.5 2.5"/>'},
+      {k:'C',l:'C · Bubble + dots',s:'they’re waiting on you',svg:'<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 10h.01M12 10h.01M16 10h.01" stroke-width="2.8"/>'}
+    ]},
+  lead: { name:'Lead Follow-Ups', count:58, fill:'#F4EADC', stroke:'#C8956C', txt:'#A9764E', sub:'58 leads to follow up with',
+    what:'Leads (prospects, including Opportunity Call sign-ups) who need a first hello, a follow-up that has come due, or a pre-call reminder today.',
+    opts:[
+      {k:'cur',l:'Current',s:'paper plane',svg:'<path d="M21.5 3.5L2.5 10.2l7.2 2.9 2.9 7.2z"/><path d="M9.7 13.1l4.2-4.2"/>'},
+      {k:'A',l:'A · Person + plus',s:'a new or open lead',svg:'<circle cx="9" cy="7" r="4"/><path d="M2 21v-1a6 6 0 0 1 6-6h2a6 6 0 0 1 4 1.5"/><path d="M19 13v6M16 16h6"/>'},
+      {k:'B',l:'B · Person + arrow out',s:'reach out to them',svg:'<circle cx="9" cy="7" r="4"/><path d="M2 21v-1a6 6 0 0 1 6-6h4"/><path d="M15.5 20.5l6-6"/><path d="M17 14.5h4.5V19"/>'},
+      {k:'C',l:'C · Target',s:'your prospects',svg:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor"/>'}
+    ]}
+};
+const ORDER=['fu','msg','lead'];
+const pick={fu:'cur',msg:'cur',lead:'cur'};
+let open=false;
+const svg=(b,c,s)=>`<svg viewBox="0 0 24 24" width="${s}" height="${s}" fill="none" stroke="${c}" color="${c}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${b}</svg>`;
+const cur=k=>ICONS[k].opts.find(o=>o.k===pick[k]);
+function render(){
+  document.getElementById('chips').innerHTML=open?'':ORDER.map(k=>{const c=ICONS[k];return `<div class="chip" style="background:${c.fill};color:${c.txt}">${svg(cur(k).svg,c.stroke,12)}${c.count}</div>`}).join('');
+  document.getElementById('chev').innerHTML=`<path d="${open?'M6 15l6-6 6 6':'M6 9l6 6 6-6'}"/>`;
+  const rows=document.getElementById('rows');rows.style.display=open?'block':'none';
+  rows.innerHTML=ORDER.map(k=>{const c=ICONS[k];return `<div class="row"><div class="tile" style="background:${c.fill}">${svg(cur(k).svg,c.stroke,18)}</div><div style="min-width:0"><div class="rt">${c.name}</div><div class="rs">${c.sub}</div></div><div class="pill" style="color:${c.txt}">${c.count}</div></div>`}).join('');
+  document.getElementById('sel').textContent='Your picks: '+ORDER.map(k=>ICONS[k].name.replace(' Follow-Ups','')+' '+(pick[k]==='cur'?'current':pick[k])).join(' · ');
+  document.getElementById('pickers').innerHTML=ORDER.map(k=>{const c=ICONS[k];return `<div class="pk"><div class="pkH"><div class="tile" style="background:${c.fill}">${svg(cur(k).svg,c.stroke,15)}</div><div class="pkT">${c.name} <span style="color:${c.txt}">· ${c.count}</span></div></div><div class="pkD"><b>What it counts:</b> ${c.what}</div><div class="opts">${c.opts.map(o=>`<button class="opt ${pick[k]===o.k?'on':''}" data-k="${k}" data-o="${o.k}"><div class="tile" style="background:${c.fill}">${svg(o.svg,c.stroke,20)}</div><div class="ol">${o.l}</div><div class="os">${o.s}</div></button>`).join('')}</div></div>`}).join('');
+  document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{pick[b.dataset.k]=b.dataset.o;render()});
+}
+document.getElementById('head').onclick=()=>{open=!open;render()};
+render();
+</script>
+</body>
+</html>
